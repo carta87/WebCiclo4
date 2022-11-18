@@ -23,8 +23,9 @@
           origen: servicio.origen,
           destino: servicio.destino,
           fecha: servicio.fecha,
+          hora: servicio.hora,
           encomienda: servicio.encomienda,
-          valor: servicio.valor
+          valor: servicio.valor,
         });
       }
       //Obtiene todos los servicios

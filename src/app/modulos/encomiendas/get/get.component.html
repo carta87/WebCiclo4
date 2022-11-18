@@ -1,1 +1,31 @@
-<p>get works!</p>
+<div class="container">
+  <br />
+  <a routerLink="/encomiendas/create" class="btn">Registrar Encomienda</a>
+
+  <table class="table responsive">
+    <thead>
+      <tr>
+        <th>Descripcion</th>
+        <th>peso</th>
+        <th>tipo</th>
+        <th>presentacion</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let encomienda of listado">
+        <td>{{ encomienda.descripcion }}</td>
+        <td>{{ encomienda.peso }}</td>
+        <td>{{ encomienda.tipo }}</td>
+        <td>{{ encomienda.presentacion }}</td>
+        <td>
+          <a routerLink="/encomiendas/edit/{{ encomienda.id }}" class="btn">
+            <i class="material-icons">edit</i>
+          </a>
+          <button class="btn red" (click)="delete(encomienda.id)">
+            <i class="material-icons">delete</i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
