@@ -3,6 +3,10 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ServicioModel } from 'src/app/modelos/servicio.model';
 import { ServicioService } from 'src/app/servicios/servicio.service';
+import { ClienteModel } from 'src/app/modelos/cliente.model';
+import { EncomiendaModel } from 'src/app/modelos/encomienda.model';
+import { ClienteService } from 'src/app/servicios/cliente.service';
+import { EncomiendaService } from 'src/app/servicios/encomienda.service';
 import Swal from 'sweetalert2'
 
 @Component({
@@ -14,7 +18,12 @@ export class CreateComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
     private servicioService: ServicioService,
-    private router: Router) { }
+    private router: Router,
+    private clienteService: ClienteService,
+    private encomiendaService: EncomiendaService) { }
+
+    listadoClientes: ClienteModel[] = []
+    listadoEncomiendas: EncomiendaModel[] = []
 
     fgValidacion = this.fb.group({
       origen: ['', [Validators.required]],
@@ -27,6 +36,8 @@ export class CreateComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.getEncomiendas();
+    this.getClientes();
   }
   
   store(){
@@ -44,14 +55,22 @@ export class CreateComponent implements OnInit {
       this.router.navigate(['/servicios/get']);
     },
     (error: any) => {
-      console.log(error+ 
-        servicio.origen + 
-    servicio.destino + 
-    servicio.fecha +
-    servicio.hora +
-    servicio.encomienda +
-    servicio.valor  )
+      console.log()
       alert("Error en el envio");
+    })
+  }
+
+  getEncomiendas(){
+    this.encomiendaService.getAll().subscribe((data: EncomiendaModel[]) => {
+      this.listadoEncomiendas = data
+      console.log(data)
+    })
+  }
+
+  getClientes(){
+    this.clienteService.getAll().subscribe((data: ClienteModel[]) => {
+      this.listadoClientes = data
+      console.log(data)
     })
   }
 
