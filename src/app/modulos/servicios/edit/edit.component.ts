@@ -56,6 +56,7 @@ export class EditComponent implements OnInit {
     servicio.valor = this.fgValidacion.controls["valor"].value as number;
  
     this.servicioService.update(servicio).subscribe((data: ServicioModel)=> {
+      alert(servicio.hora );
       Swal.fire('Editado Correctamente!', '', 'success')
       this.router.navigate(['/servicios/get']);
     },
